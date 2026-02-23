@@ -1,0 +1,26 @@
+*.sh
+# Local .terraform directories and files
+**/.terraform/*
+
+# .tfstate files (CRITICAL: These can contain secrets in plain text!)
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Exclude all .tfvars files, which often contain sensitive data/secrets.
+# (If you have a tfvars file with NO secrets that you want to share, you can force add it later)
+*.tfvars
+*.tfvars.json
+
+# Ignore override files (used for local testing only)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
