@@ -51,3 +51,7 @@ value = azurerm_storage_account.example.name
 }
 
 ## File Structure
+
+- If you have a env file to load variables: run `source .env` before `tf plan`.
+
+**best way is to create a .tfvars file and store ad keyvalue store and reference as variable and then into where required**
