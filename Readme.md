@@ -23,6 +23,8 @@ export ARM_TENANT_ID=""
 
 `terraform refresh` - reconciles your local Terraform state file with the actual, current infrastructure in your cloud provider, updating the state to match reality.
 
+`terraform destroy --auto-approve` - destroys any terraform or corrupted deployments
+
 Backend.sh file to storage the state file of Terraform in azure which holds deployment details.
 
 ## Adding Variable
@@ -55,3 +57,6 @@ value = azurerm_storage_account.example.name
 - If you have a env file to load variables: run `source .env` before `tf plan`.
 
 **best way is to create a .tfvars file and store ad keyvalue store and reference as variable and then into where required**
+
+- Implecit Dependency - Dependency created by the file itself.
+- Explicit dependency - Dependency mentioned in file. (Avoid this generally)

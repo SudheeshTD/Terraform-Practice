@@ -6,6 +6,6 @@ resource "azurerm_storage_account" "example" {
   account_replication_type = "LRS"
 
   tags = {
-    environment = local.common_tags.environment
+    environment = local.common_tags.stage
   }
 }
