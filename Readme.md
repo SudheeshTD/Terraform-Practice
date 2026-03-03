@@ -19,11 +19,9 @@ export ARM_TENANT_ID=""
 
 `tf apply --auto-approve` - Create or update infrastructure without approval
 
-`tf apply --auto-approve` - Dest roy previously-created infrastructure
+`tf apply --auto-approve` - Destroy previously-created infrastructure
 
 `terraform refresh` - reconciles your local Terraform state file with the actual, current infrastructure in your cloud provider, updating the state to match reality.
-
-`terraform destroy --auto-approve` - destroys any terraform or corrupted deployments
 
 Backend.sh file to storage the state file of Terraform in azure which holds deployment details.
 
@@ -60,3 +58,5 @@ value = azurerm_storage_account.example.name
 
 - Implecit Dependency - Dependency created by the file itself.
 - Explicit dependency - Dependency mentioned in file. (Avoid this generally)
+
+- to address the defined tuple as variable in other file
