@@ -60,3 +60,13 @@ value = azurerm_storage_account.example.name
 - Explicit dependency - Dependency mentioned in file. (Avoid this generally)
 
 - to address the defined tuple as variable in other file
+
+### Meta Arguments:
+
+- `count` - to create multiple resources with same configuration
+- `for_each` - to create multiple resources with same configuration but different values. Cannot be used on list as it can contain duplicate values, it can only be used on set or map.
+- `depends_on` - to create dependency between resources(Explicit Dependency)
+- `lifecycle` - to manage the lifecycle of resources (create before destroy, prevent destroy, ignore changes, replace triggers custom conditions)
+- `provider` - to specify the provider for the resource
+- `provisioner` - to execute scripts or commands on the resource after creation
+- `connection` - to specify the connection details for the provisioner
