@@ -61,7 +61,7 @@ value = azurerm_storage_account.example.name
 
 - to address the defined tuple as variable in other file
 
-### Meta Arguments:
+## Meta Arguments:
 
 - `count` - to create multiple resources with same configuration
 - `for_each` - to create multiple resources with same configuration but different values. Cannot be used on list as it can contain duplicate values, it can only be used on set or map.
@@ -70,3 +70,8 @@ value = azurerm_storage_account.example.name
 - `provider` - to specify the provider for the resource
 - `provisioner` - to execute scripts or commands on the resource after creation
 - `connection` - to specify the connection details for the provisioner
+
+## Methods:
+
+- `contains` - to check if a list contains a specific value
+- `length` - to get the length of a list or map
