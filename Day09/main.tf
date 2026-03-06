@@ -3,7 +3,7 @@ resource "azurerm_resource_group" "example" {
 
   lifecycle {
     create_before_destroy = true
-    prevent_destroy = true
+    #prevent_destroy = true
     precondition {
       condition = contains(var.allowed_locations, var.location)
       error_message = "Please Enter a valid location"

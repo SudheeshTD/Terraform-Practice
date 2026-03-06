@@ -75,3 +75,18 @@ value = azurerm_storage_account.example.name
 
 - `contains` - to check if a list contains a specific value
 - `length` - to get the length of a list or map
+
+## Dynamic Block:
+
+- to create multiple blocks of the same type with different values. It is used to create multiple blocks of the same type with different values. It is used to create multiple blocks of the same type with different values.
+  dynamic "network_interface" {
+  for_each = var.network_interfaces
+  content {
+  name = network_interface.value.name
+  }
+  }
+
+## Splat Expression:
+
+- to access the attributes of a resource that is created with count or for_each. It is used to access the attributes of a resource that is created with count or for_each. It is used to access the attributes of a resource that is created with count or for_each.
+  azurerm_network_interface.example[*].id
