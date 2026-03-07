@@ -9,6 +9,17 @@ locals {
     port = port
     description= "Allowed port on port: ${port}"
   }]
+  vm_sizes = lookup(var.vm_sizes, var.environment, lower("dev"))
+  user_location = ["eastus", "westus", "centralus"]
+  default_location = ["centralus"]
+  unique_location = toset(concat(local.user_location, local.default_location))
+
+  monthly_cost = [-40, 36, -44, 67, 32]
+  max_positive_cost = max([for cost in local.monthly_cost: abs(cost)]...)
+
+  current_time = timestamp()
+  resource_name = formatdate("YYYYMMDD",local.current_time)
+  tag_date = formatdate("DD-MM-YYYY", local.current_time)
 }
 
 resource "azurerm_resource_group" "rg" {
@@ -16,6 +27,7 @@ resource "azurerm_resource_group" "rg" {
   location = "eastus"
    
   tags = local.merge_tags
+
 
 }
 
@@ -70,4 +82,29 @@ output "nsg_rules" {
 
 output "security_name" {
   value = azurerm_network_security_group.example
+}
+
+output "vm_size" {
+  value = local.vm_sizes
+}
+
+output "backup" {
+  value = var.backup_name
+}
+
+output "credential" {
+  value = var.credential
+  sensitive = true
+}
+
+output "unique_location" {
+  value = local.unique_location
+}
+
+output "max_positive_cost" {
+  value = local.max_positive_cost
+}
+
+output "resource_tag" {
+  value = local.tag_date
 }
