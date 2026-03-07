@@ -31,3 +31,8 @@ variable "storage_account_name" {
 
   
 }
+
+variable "allowed_ports" {
+  type = string
+  default = "80,443,8080,3306"
+}
