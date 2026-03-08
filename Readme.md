@@ -90,3 +90,11 @@ value = azurerm_storage_account.example.name
 
 - to access the attributes of a resource that is created with count or for_each. It is used to access the attributes of a resource that is created with count or for_each. It is used to access the attributes of a resource that is created with count or for_each.
   azurerm_network_interface.example[*].id
+
+## Data Source:
+
+- to get the details of an existing resource in the cloud provider.
+
+  `data "azurerm_resource_group" "example" {`
+  `name = "example-resources"(name of the Existing resource group to get details of from cloud provider)`
+  `}`
