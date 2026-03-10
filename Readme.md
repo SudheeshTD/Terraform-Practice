@@ -79,12 +79,12 @@ value = azurerm_storage_account.example.name
 ## Dynamic Block:
 
 - to create multiple blocks of the same type with different values. It is used to create multiple blocks of the same type with different values. It is used to create multiple blocks of the same type with different values.
-  dynamic "network_interface" {
-  for_each = var.network_interfaces
-  content {
-  name = network_interface.value.name
-  }
-  }
+  `dynamic "network_interface" {`
+  `for_each = var.network_interfaces`
+  `content {`
+  `name = network_interface.value.name`
+  `}`
+  `}`
 
 **Splat Expression:**
 
@@ -98,3 +98,29 @@ value = azurerm_storage_account.example.name
   `data "azurerm_resource_group" "example" {`
   `name = "example-resources"(name of the Existing resource group to get details of from cloud provider)`
   `}`
+
+## How Azure WOrks:
+
+Most Outer Layer - **Management Group**
+Next Layer - **Subscription**
+Next Layer - **Resource Group**
+Next Layer - **Virtual Network(Vnet)** - It has a CIDR block associated with it which is a range of IP addresses that can be used for the resources in the Vnet.
+Everythn=ing is inside the Vnet.
+**Public IP** - It is used to access the resources in the Vnet from the internet. It is associated with a network interface.
+**Network Gateway/Load Balancer** **- It is used to connect the Vnet to the on-premises network or to the internet. It is associated with a public IP and a network interface.
+**Subnets** - It is a range of IP addresses that can be used for the resources in the Vnet. It is associated with a network interface.
+Subnets will have **Network Security Group(NSG)** associated with it which is used to control the inbound and outbound traffic to the resources in the subnet. NSG will have rules associated with it which will allow or deny the traffic based on the source, destination, port and protocol.
+**VMSS\*\* - It is a group of virtual machines that are created from the same image and have the same configuration. It is used to create a scalable and highly available application. Its Inside Subnet. it can have scale rule to autoscale.
+
+- its also called backend pool of load balancer as it is associated with the load balancer and the load balancer will distribute the traffic to the virtual machines in the VMSS.
+  **VM** - will be inside the VMSS that process the request.4
+
+**NAT** - It is used to translate the private IP addresses of the resources in the Vnet to the public IP address of the load balancer. It is associated with a network interface and a public IP. so that the resources in the Vnet can access the internet and the users can access the resources in the Vnet from the internet.
+
+How Request Flows:
+
+1. User sends a request to the public IP of the load balancer.
+2. The load balancer receives the request and distributes it to one of the virtual machines in the VMSS based on the load balancing algorithm.
+3. Load Balancer will have a health probe associated with it which will check the health of the virtual machines in the VMSS and if any virtual machine is unhealthy, it will stop sending traffic to that virtual machine until it becomes healthy again. ports 80 and 443 are generally used for web applications.
+4. The virtual machine processes the request and sends the response back to the load balancer.
+5. The load balancer receives the response from the virtual machine and sends it back to the user.
